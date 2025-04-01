@@ -1,5 +1,4 @@
 import mongoose  from "mongoose";
-import { Adamina } from "next/font/google";
 
 const userSchema = mongoose.Schema(
   {

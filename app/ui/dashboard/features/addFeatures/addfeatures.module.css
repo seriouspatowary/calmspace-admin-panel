@@ -1,0 +1,60 @@
+.container {
+    background-color: var(--bgSoft);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form input,
+.form textarea,
+.form select {
+    padding: 30px;
+    background-color: var(--bg);
+    color: var(--text);
+    border: 2px solid #2e374a;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.form input,
+.form select {
+    width: 45%;
+}
+
+.form textarea {
+    width: 100%;
+}
+
+
+
+.form input {
+    width: 100%;
+    /* Ensures inputs take full width */
+    max-width: 400px;
+    /* Adjust the max width */
+    margin-bottom: 10px;
+    /* Adds spacing between fields */
+}
+.form button {
+    width: 200px;
+    /* Adjust width */
+    padding: 12px 20px;
+    /* Adjust padding */
+    background-color: teal;
+    color: var(--text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 300px;
+    /* Space between file input and button */
+    font-size: 16px;
+    text-align: center;
+   margin-left: 600px;
+   margin-bottom: 20px;
+}

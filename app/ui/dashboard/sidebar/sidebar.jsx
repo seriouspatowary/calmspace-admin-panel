@@ -34,6 +34,11 @@ const menuItems = [
         title: "Counselors",
         path: "/dashboard/counselors",
         icon: <MdSupervisedUserCircle />,
+      },
+      {
+        title: "Features",
+        path: "/dashboard/features",
+        icon: <MdSupervisedUserCircle />,
       }
     ],
   },
