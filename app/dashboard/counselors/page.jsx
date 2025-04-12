@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { fetchCounselors } from "@/app/lib/data/user"
 import Pagination from "@/app/ui/dashboard/pagination/pagination"
 import Search from "@/app/ui/dashboard/search/search"
