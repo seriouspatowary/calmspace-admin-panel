@@ -1,61 +1,20 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { authConfig } from "./authconfig";
-import { Admin } from "./lib/model/Admin";
-import { connectDB } from "./lib/util";
-import bcrypt from "bcrypt";
+import { cookies } from "next/headers";
+import { jwtVerify } from "jose";
 
-const login = async (credentials) => {
-  console.log("credentials:", credentials);
+export const getSession = async () => {
   try {
-    await connectDB();
-    const user = await Admin.findOne({ email: credentials.email });
+    const cookieStore = await cookies();
+    const token = cookieStore.get("session_token")?.value;
+    
+    if (!token) return null;
 
-    if (!user) throw new Error("Wrong credentials!");
+    const secretKey = new TextEncoder().encode(process.env.NEXTAUTH_SECRET);
 
-    const isPasswordCorrect = await bcrypt.compare(
-      credentials.password,
-      user.password
-    );
+    const { payload } = await jwtVerify(token, secretKey); // ✅ Verifying JWT with `jose`
 
-    if (!isPasswordCorrect) throw new Error("Wrong credentials!");
-
-    return user;
+    return payload; // Contains user details (_id, email, name)
   } catch (err) {
-    console.log(err);
-    throw new Error("Failed to login!");
+    console.error("Invalid session:", err);
+    return null;
   }
 };
-
-export const { signIn, signOut, auth } = NextAuth({
-  ...authConfig,
-  providers: [
-    CredentialsProvider({
-      async authorize(credentials) {
-        try {
-          const user = await login(credentials);
-          return user;
-        } catch (err) {
-          return null;
-        }
-      },
-    }),
-  ],
-  // ADD ADDITIONAL INFORMATION TO SESSION
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.username = user.username;
-        token.img = user.img;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token) {
-        session.user.username = token.username;
-        session.user.img = token.img;
-      }
-      return session;
-    },
-  },
-});

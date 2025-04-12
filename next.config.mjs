@@ -12,7 +12,8 @@ const nextConfig = {
             },
             {
                 protocol: "https",
-                hostname:"calmspce-all-image.s3.ap-south-1.amazonaws.com"
+                hostname: "calmspce-all-image.s3.ap-south-1.amazonaws.com",
+                pathname: "**",
             }
         ]
     }

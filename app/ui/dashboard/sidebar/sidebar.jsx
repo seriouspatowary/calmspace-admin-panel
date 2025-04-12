@@ -1,13 +1,10 @@
 import React from 'react'
 import styles from './sidebar.module.css'
-
+import { getSession } from '@/app/auth';
 import {
   MdDashboard,
   MdSupervisedUserCircle,
-  MdShoppingBag,
-  MdAttachMoney,
-  MdWork,
-  MdAnalytics,
+MdArticle,
   MdPeople,
   MdOutlineSettings,
   MdHelpCenter,
@@ -15,6 +12,7 @@ import {
 } from "react-icons/md";
 import MenuLink from './menuLink/menuLink';
 import Image from 'next/image';
+import { logout } from '@/app/lib/actions';
 
 const menuItems = [
   {
@@ -28,7 +26,7 @@ const menuItems = [
       {
         title: "Users",
         path: "/dashboard/users",
-        icon: <MdSupervisedUserCircle />,
+        icon: <MdPeople/>,
       },
       {
         title: "Counselors",
@@ -38,7 +36,12 @@ const menuItems = [
       {
         title: "Features",
         path: "/dashboard/features",
-        icon: <MdSupervisedUserCircle />,
+        icon: <MdDashboard />,
+      },
+      {
+        title: "Blogs",
+        path: "/dashboard/blogs",
+        icon: <MdArticle />,
       }
     ],
   },
@@ -60,13 +63,16 @@ const menuItems = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = async() => {
+
+  const {email} = await getSession(); // Directly fetch session data
+
   return (
     <div className={styles.container}>
       <div className={styles.user}>
-        <Image className={styles.userImage}src="./vercel.svg" alt="" width="50" height="50" />
+        <Image className={styles.userImage}src="/logo.png" alt="" width="50" height="50" />
         <div className={styles.userDetail}>
-          <span className={styles.username}>username</span>
+          <span className={styles.username}>{ email}</span>
           <span className={styles.userTitle}>Administrator</span>
         </div>
       </div>
@@ -84,10 +90,12 @@ const Sidebar = () => {
                   
               ))}
       </ul>
-      <button className={styles.logout}>
-        <MdLogout/>
-        Logout
-      </button>
+     <form action={logout}>
+        <button type="submit" className={styles.logout}>
+          <MdLogout />
+          Logout
+        </button>
+      </form>
           
     </div>
   )

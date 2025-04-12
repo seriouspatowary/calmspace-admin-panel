@@ -3,19 +3,19 @@ import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/features/features.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchFeatures } from "@/app/lib/data/feature";
-import { deleteFeature } from "@/app/lib/actions";
+import { fetchBlogs } from "@/app/lib/data/blog";
+import { deleteBlog } from "@/app/lib/actions";
 
-const FeaturesPage = async ({ searchParams }) => {
+const BlogPage = async ({ searchParams }) => {
 
   const { q, page } = await searchParams;
-  const { count,  features } = await fetchFeatures(q, page);
+  const { count,  blogs } = await fetchBlogs(q, page);
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a user..." />
-        <Link href="/dashboard/features/add">
+        <Link href="/dashboard/blogs/add">
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
@@ -23,19 +23,23 @@ const FeaturesPage = async ({ searchParams }) => {
         <thead>
           <tr>
             <td>Title</td>
-            <td>Sub Title</td>
+            <td>Author</td>
+            <td>Designation</td>
+            <td>Category</td>
+            <td>Type</td>
+            <td>Description</td>
             <td>Date</td>
             <td>Action</td>
           </tr>
         </thead>
         <tbody>
-          {features.map((item) => (
+          {blogs.map((item) => (
             <tr key={item.id}>
               <td>
                 <div className={styles.user}>
                   <Image
-                    src={item.imgSrc || "/noavatar.png"}
-                    alt="loading"
+                    src={"/avatar.png"}
+                    alt=""
                     width={40}
                     height={40}
                     className={styles.userImage}
@@ -43,16 +47,21 @@ const FeaturesPage = async ({ searchParams }) => {
                   {item.title}
                 </div>
               </td>
-              <td>{item.subtitle}</td>
-              <td>{item.date?.toString().slice(4, 16)}</td>
+              <td>{item.author}</td>
+              <td>{item.designation || 'NA'}</td>
+              <td>{item.category || 'NA'}</td>
+              <td>{item.type || 'NA'}</td>
+              <td>{item.desc ? `${item.desc.substring(0, 20)}${item.desc.length > 20 ? '...' : ''}` : 'NA'}</td>
+              <td>{item.createdAt}</td>
+
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/features/${item.id}`}>
+                  <Link href={`/dashboard/blogs/${item.id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       View
                     </button>
                   </Link>
-                  <form action={deleteFeature}>
+                  <form action={deleteBlog}>
                     <input type="hidden" name="id" value={(item.id)} />
                     <button className={`${styles.button} ${styles.delete}`}>
                       Delete
@@ -69,4 +78,4 @@ const FeaturesPage = async ({ searchParams }) => {
   );
 };
 
-export default FeaturesPage;
+export default BlogPage;
