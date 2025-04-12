@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+
+
 import { addFeature } from "@/app/lib/actions";
 import styles from "@/app/ui/dashboard/features/addFeatures/addfeatures.module.css";
 
