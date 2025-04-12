@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+
+
 import React from 'react'
 import styles from '@/app/ui/dashboard/features/singleFeature/singleFeature.module.css'
 import Image from 'next/image'

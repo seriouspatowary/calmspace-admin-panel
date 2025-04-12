@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/features/features.module.css";
