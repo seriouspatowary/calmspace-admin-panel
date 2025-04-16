@@ -1,6 +1,5 @@
 import { connectDB } from "../util";
 import { Feature } from "../model/Feature";
-import { generateSignedUrl } from "../generateSignUrl";
 
 
 export const fetchFeature = async (id) => {
@@ -16,7 +15,7 @@ export const fetchFeature = async (id) => {
       id: feature._id.toString(),
       title: feature.title,
       subtitle: feature.subtitle,
-      imgSrc: await generateSignedUrl(feature.imgSrc), // Generate signed URL for image
+      imgSrc:feature.imgSrc, // Generate signed URL for image
     };
   } catch (err) {
     console.error(err);
@@ -44,7 +43,7 @@ export const fetchFeatures = async (q, page) => {
         title: feature.title,
         subtitle: feature.subtitle,
         date:feature.date,
-        imgSrc: await generateSignedUrl(feature.imgSrc), // Generate signed URL
+        imgSrc: feature.imgSrc
       }))
     );
 

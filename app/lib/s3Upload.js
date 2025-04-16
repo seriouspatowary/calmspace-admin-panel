@@ -23,7 +23,8 @@ export async function uploadToS3(file) {
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: fileKey,
     Body: Buffer.from(fileBuffer),
-    ContentType: file.type
+    ContentType: file.type,
+    ACL: "public-read"
   };
 
   await s3.send(new PutObjectCommand(uploadParams));

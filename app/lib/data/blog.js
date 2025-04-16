@@ -1,6 +1,5 @@
 import { connectDB } from "../util";
 import { Article } from "../model/Blog";
-import { generateSignedUrl } from "../generateSignUrl";
 
 
 export const fetchBlog = async (id) => {
@@ -16,8 +15,7 @@ export const fetchBlog = async (id) => {
     return {
       ...blog.toObject(),
        _id: blog._id.toString(),
-        imgSrc: await generateSignedUrl(blog.imgSrc), // Generate signed URL for image
-
+        imgSrc: blog.imgSrc
     };
   } catch (err) {
     console.error(err);
@@ -44,7 +42,7 @@ export const fetchBlogs = async (q, page) => {
       blogs.map(async (feature) => ({
       
        _id: feature._id.toString(),
-        imgSrc: await generateSignedUrl(feature.imgSrc),
+        imgSrc: feature.imgSrc,
  
       }))
     );
