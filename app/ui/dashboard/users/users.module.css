@@ -29,3 +29,15 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.verifyBtn {
+    padding: 10px;
+        background-color: #5d57c9;
+        color: var(--text);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+}
+
+.verifyBtn:hover {
+color: var(--text);    /* Darker green for hover effect */
+}

@@ -26,7 +26,8 @@ const menuItems = [
       {
         title: "Users",
         path: "/dashboard/users",
-        icon: <MdPeople/>,
+        icon: <MdPeople />,
+        
       },
       {
         title: "Counselors",

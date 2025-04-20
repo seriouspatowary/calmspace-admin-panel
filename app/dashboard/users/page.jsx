@@ -1,17 +1,14 @@
 export const dynamic = "force-dynamic";
-
-
 import { fetchUsers } from "@/app/lib/data/user"
 import Pagination from "@/app/ui/dashboard/pagination/pagination"
 import Search from "@/app/ui/dashboard/search/search"
 import styles from "@/app/ui/dashboard/users/users.module.css"
 import Image from "next/image"
-
+import {verifyCounselor} from "@/app/lib/actions"
 
 const UsersPage = async ({searchParams}) => {
   const {q,page} = await searchParams
   const {users,count} = await fetchUsers(q,page);
-  
 
   return (
     <div className={styles.container}>
@@ -23,34 +20,53 @@ const UsersPage = async ({searchParams}) => {
           <tr>
             <td>Name</td>
             <td>Email</td>
+            <td>Gender</td>
+            <td>Age</td>
             <td>Created At</td>
             <td>Role</td>
+            <td>Verificstion Status</td>
           </tr>
         </thead>
         <tbody>
-          {
-            users.map((data)=>(
-          <tr key={data.id}>
-            <td>
-            <div className={styles.user}>
-              <Image
-                src={data.pic || "/avatar.png"}
-                alt=""
-                width={40}
-                height={40}
-                className={styles.userImage}
-              />
-              {data.name}
-            </div>
-          </td>
-                <td>{data.email}</td>
-                <td>{data.createdAt.toString().slice(4,16)}</td>
-                <td>{data.role}</td>
-          </tr>
-          )) }
-        
-          
-        </tbody>
+  {users.map((data) => (
+    <tr key={data._id}>
+      <td>
+        <div className={styles.user}>
+          <img
+            src={data.pic || "/avatar.png"}
+            alt="profile"
+            width={40}
+            height={40}
+            className={styles.userImage}
+          />
+          {data.name}
+        </div>
+      </td>
+      <td>{data.email}</td>
+      <td>{data.gender}</td>
+      <td>{data.age}</td>
+      <td>{data.createdAt.toString().slice(4, 16)}</td>
+      <td>{data.role}</td>
+     <td>
+  {data.role === "counselor" ? (
+    data.adminVerified ? (
+      <span className={styles.verified}>Verified</span>
+    ) : (
+      <form action={verifyCounselor}>
+        <input type="hidden" name="userId" value={data._id.toString()} />
+         <button type="submit" className={styles.verifyBtn}>Verify</button>
+      </form>
+    )
+  ) : (
+    <span>NA</span>
+  )}
+</td>
+
+
+    </tr>
+  ))}
+</tbody>
+
       </table>
       <Pagination count={count} />
     </div>

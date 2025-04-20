@@ -10,6 +10,7 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { SignJWT } from "jose";
 import { Article } from "./model/Blog";
+import {VerificationMaster} from "./model/VerificationMaster"
 
 export async function logout() {
   try {
@@ -251,7 +252,6 @@ export async function deleteBlog(formData) {
     
         await connectDB();
         
-        
         await Article.findByIdAndDelete(id)
         console.log("Deleted successfully");
 
@@ -300,3 +300,26 @@ export const authenticate = async (formData) => {
   }
 };
 
+export async function verifyCounselor(formData) {
+  try {
+    const userId = formData.get("userId");
+
+    await connectDB();
+
+    const alreadyVerified = await VerificationMaster.findOne({ userId });
+
+    if (!alreadyVerified) {
+      await VerificationMaster.create({
+        userId,
+        adminVerified: true,
+      });
+      console.log("Counselor verified successfully");
+    }
+
+    revalidatePath("/dashboard/users");
+
+  } catch (error) {
+    console.error("Error verifying counselor:", error.message);
+    throw new Error("Failed to verify counselor");
+  }
+}
