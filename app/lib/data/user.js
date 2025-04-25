@@ -6,6 +6,8 @@ import { VerificationMaster } from "../model/VerificationMaster";
 export const fetchUsers = async (q, page) => {
     const regex = new RegExp(q, "i");
     const ITEM_PER_PAGE = 6;
+    const currentPage = parseInt(page, 10) || 1;
+
 
   try {
     await connectDB();
@@ -38,7 +40,7 @@ export const fetchUsers = async (q, page) => {
           verification: 0, 
         },
       },
-      { $skip: ITEM_PER_PAGE * (page - 1) },
+      { $skip: ITEM_PER_PAGE * (currentPage - 1) },
       { $limit: ITEM_PER_PAGE },
     ]);
 
