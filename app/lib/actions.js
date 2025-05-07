@@ -28,7 +28,6 @@ export async function logout() {
     throw new Error("Failed to logout");
   }
 
-  // Redirect to login page after logout
   redirect("/login");
 }
 
@@ -38,6 +37,7 @@ export async function addFeature(formData) {
         const title = formData.get("title");
         const subtitle = formData.get("subtitle");
         const image = formData.get("image"); 
+      
         if (!image) {
             throw new Error("Image is required");
         }
@@ -50,8 +50,7 @@ export async function addFeature(formData) {
             imgSrc: imageUrl
         });
 
-        await newFeature.save();
-        console.log("Feature saved successfully");
+      await newFeature.save();
 
     } catch (error) {
         console.error("Error Adding Feature:", error.message);
@@ -68,13 +67,9 @@ export async function deleteFeature(formData) {
         
 
         const id = formData.get("id")
-    
         await connectDB();
-        
-        
         await Feature.findByIdAndDelete(id)
-        console.log("Deleted successfully");
-
+      
     } catch (error) {
         console.error("Error Deleting Feature:", error.message);
         throw new Error("Failed to Delete Feature");
@@ -300,10 +295,9 @@ export const authenticate = async (formData) => {
   }
 };
 
-export async function verifyCounselor(formData) {
+export async function verifyCounselor({ userId }) {
   try {
-    const userId = formData.get("userId");
-
+    console.log("userid:",userId)
     await connectDB();
 
     const alreadyVerified = await VerificationMaster.findOne({ userId });
@@ -323,3 +317,4 @@ export async function verifyCounselor(formData) {
     throw new Error("Failed to verify counselor");
   }
 }
+

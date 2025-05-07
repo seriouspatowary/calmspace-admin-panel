@@ -1,13 +1,27 @@
 import { connectDB } from "../util";
 import { User } from "../model/user";
 import { Counselor } from "../model/Counselor";
-import { VerificationMaster } from "../model/VerificationMaster";
+
+export const fetchTotalCounts = async () => {
+  try {
+    await connectDB();
+    const totalUsers = await User.countDocuments();
+    const totalCounselors = await Counselor.countDocuments();
+
+    return {
+      totalUsers,
+      totalCounselors,
+    };
+  } catch (err) {
+    console.error("Error fetching total counts:", err.message);
+    throw new Error("Failed to fetch total counts!");
+  }
+};
 
 export const fetchUsers = async (q, page) => {
     const regex = new RegExp(q, "i");
     const ITEM_PER_PAGE = 6;
     const currentPage = parseInt(page, 10) || 1;
-
 
   try {
     await connectDB();

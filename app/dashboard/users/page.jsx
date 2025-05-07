@@ -1,10 +1,11 @@
 export const dynamic = "force-dynamic";
+
 import { fetchUsers } from "@/app/lib/data/user"
 import Pagination from "@/app/ui/dashboard/pagination/pagination"
 import Search from "@/app/ui/dashboard/search/search"
 import styles from "@/app/ui/dashboard/users/users.module.css"
 import Image from "next/image"
-import {verifyCounselor} from "@/app/lib/actions"
+import VerifyButton from "@/app/ui/dashboard/verifyButton/VerifyButton";
 
 const UsersPage = async ({searchParams}) => {
   const {q,page} = await searchParams
@@ -28,49 +29,47 @@ const UsersPage = async ({searchParams}) => {
           </tr>
         </thead>
         <tbody>
-  {users.map((data) => (
-    <tr key={data._id}>
-      <td>
-        <div className={styles.user}>
-          <img
-            src={data.pic || "/avatar.png"}
-            alt="profile"
-            width={40}
-            height={40}
-            className={styles.userImage}
-          />
-          {data.name}
-        </div>
+        {users.map((data) => (
+          <tr key={data._id}>
+            <td>
+              <div className={styles.user}>
+                <img
+                  src={data.pic || "/avatar.png"}
+                  alt="profile"
+                  width={40}
+                  height={40}
+                  className={styles.userImage}
+                />
+                {data.name}
+              </div>
+            </td>
+            <td>{data.email}</td>
+            <td>{data.gender}</td>
+            <td>{data.age}</td>
+            <td>{data.createdAt.toString().slice(4, 16)}</td>
+            <td>{data.role}</td>
+          <td>
+        {data.role === "counselor" ? (
+          data.adminVerified ? (
+            <span className={styles.verified}>Verified</span>
+          ) : (
+            <VerifyButton userId={data._id.toString()} />
+
+          )
+        ) : (
+          <span>NA</span>
+        )}
       </td>
-      <td>{data.email}</td>
-      <td>{data.gender}</td>
-      <td>{data.age}</td>
-      <td>{data.createdAt.toString().slice(4, 16)}</td>
-      <td>{data.role}</td>
-     <td>
-  {data.role === "counselor" ? (
-    data.adminVerified ? (
-      <span className={styles.verified}>Verified</span>
-    ) : (
-      <form action={verifyCounselor}>
-        <input type="hidden" name="userId" value={data._id.toString()} />
-         <button type="submit" className={styles.verifyBtn}>Verify</button>
-      </form>
-    )
-  ) : (
-    <span>NA</span>
-  )}
-</td>
 
 
-    </tr>
-  ))}
-</tbody>
+          </tr>
+        ))}
+      </tbody>
 
-      </table>
-      <Pagination count={count} />
-    </div>
-  )
-}
+            </table>
+            <Pagination count={count} />
+          </div>
+        )
+      }
 
 export default UsersPage

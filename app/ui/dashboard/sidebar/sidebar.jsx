@@ -66,7 +66,7 @@ const menuItems = [
 
 const Sidebar = async() => {
 
-  const {email} = await getSession(); // Directly fetch session data
+  const {email} = await getSession(); 
 
   return (
     <div className={styles.container}>
