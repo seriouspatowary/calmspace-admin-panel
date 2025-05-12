@@ -5,16 +5,65 @@ import { Counselor } from "../model/Counselor";
 export const fetchTotalCounts = async () => {
   try {
     await connectDB();
+
+    // Total counts
     const totalUsers = await User.countDocuments();
     const totalCounselors = await Counselor.countDocuments();
+
+    // Weekly user counts
+    const weeklyData = await User.aggregate([
+      {
+        $match: {
+          createdAt: { $exists: true },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            week: { $isoWeek: "$createdAt" },
+          },
+          totalUsers: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { "_id.year": 1, "_id.week": 1 },
+      },
+    ]);
+
+    // Compute weekly stats
+    const weeklyStats = weeklyData.map((entry, index) => {
+      const previous = weeklyData[index - 1];
+      const currentCount = entry.totalUsers;
+      const previousCount = previous ? previous.totalUsers : 0;
+
+      let percentChange = null;
+
+      if (previousCount === 0) {
+        percentChange = null;
+      } else {
+        percentChange = ((currentCount - previousCount) / previousCount) * 100;
+        percentChange = Math.round(percentChange * 100) / 100;
+      }
+
+      return {
+        year: entry._id.year,
+        week: entry._id.week,
+        totalUsers: currentCount,
+        percentChangeFromPreviousWeek: percentChange,
+      };
+    });
+
+    const currentWeekStats = weeklyStats[weeklyStats.length - 1];
 
     return {
       totalUsers,
       totalCounselors,
+      currentWeekStats, // Only latest week's data
     };
   } catch (err) {
-    console.error("Error fetching total counts:", err.message);
-    throw new Error("Failed to fetch total counts!");
+    console.error("Error fetching dashboard stats:", err.message);
+    throw new Error("Failed to fetch dashboard statistics!");
   }
 };
 

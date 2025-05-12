@@ -7,9 +7,29 @@ import Rightbar from '../ui/dashboard/rightbar/rightbar';
 import Chart from '../ui/dashboard/chart/chart';
 import { fetchTotalCounts } from '../lib/data/user';
 
+const getChartData = async () => {
+  try {
+    const res = await fetch('https://api.thecalmspace.in/api/auth/count', {
+      cache: 'no-store',
+    });
+    const json = await res.json();
+    if (!json?.result || !Array.isArray(json.result)) return [];
+
+    return json.result.map(item => ({
+      name: `W${item.week}-${item.year}`,
+      totalUsers: item.totalUsers,
+      percentChange: item.percentChangeFromPreviousWeek,
+    }));
+  } catch (err) {
+    console.error("Failed to fetch chart data:", err);
+    return [];
+  }
+};
+
 const Dashboard = async () => {
-  const { totalUsers, totalCounselors } = await fetchTotalCounts();
-  
+  const { totalUsers, totalCounselors, currentWeekStats } = await fetchTotalCounts();
+    const chartData = await getChartData();
+
 
   return (
     <div className={styles.wrapper}>
@@ -18,15 +38,15 @@ const Dashboard = async () => {
           <Card 
             title="Total Users" 
             number={totalUsers} 
-            detail={<span><span>12% </span>more than previous week</span>} 
+            detail={<span><span>{currentWeekStats.percentChangeFromPreviousWeek}% </span>more than previous week</span>} 
           />
           <Card 
             title="Total Counselors" 
             number={totalCounselors} 
-            detail={<span><span>8% </span> more than previous week</span>} 
+            detail={<span></span>} 
           />
         </div>
-        <Chart />
+      <Chart chartData={chartData} />
       </div>
 
       <div className={styles.side}>
