@@ -3,8 +3,7 @@ import mongoose  from "mongoose";
 const userSchema = mongoose.Schema(
   {
     name: {
-      type: "String",
-      required: true,
+      type: "String"
     },
     email: {
       type: "String",
@@ -33,8 +32,7 @@ const userSchema = mongoose.Schema(
       default: "user",
     },
     gender: {
-      type: "String",
-      required: true,
+      type: "String"
     },
     emailVerified: {
       type: "Boolean",

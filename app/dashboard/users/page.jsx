@@ -40,12 +40,12 @@ const UsersPage = async ({searchParams}) => {
                   height={40}
                   className={styles.userImage}
                 />
-                {data.name}
+                {data.name || "NA"} 
               </div>
             </td>
             <td>{data.email}</td>
-            <td>{data.gender}</td>
-            <td>{data.age}</td>
+            <td>{data.gender || "NA"}</td>
+            <td>{data.age  || "NA"}</td>
             <td>{data.createdAt.toString().slice(4, 16)}</td>
             <td>{data.role}</td>
           <td>

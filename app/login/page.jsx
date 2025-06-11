@@ -23,8 +23,9 @@ const LoginPage = () => {
     const result = await authenticate(formData);
 
     if (result.success) {
-        showSuccess("LoggedIn successfully!");
-        router.push("/dashboard");
+      router.push("/dashboard");
+      showSuccess("LoggedIn successfully!");
+
     } else {
       setLoading(false);  
       showError(result.message || "Failed to login!");
