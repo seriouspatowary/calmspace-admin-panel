@@ -9,7 +9,7 @@ import { fetchTotalCounts } from '../lib/data/user';
 
 const getChartData = async () => {
   try {
-    const res = await fetch('https://api.thecalmspace.in/api/auth/count', {
+    const res = await fetch('https://app.thecalmspace.in/api/auth/count', {
       cache: 'no-store',
     });
     const json = await res.json();

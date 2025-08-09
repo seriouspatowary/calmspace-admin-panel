@@ -11,7 +11,6 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const { showSuccess, showError } = useToast();
 
-
   const router = useRouter();
 
   const handleSubmit = async (e) => {
