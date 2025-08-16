@@ -39,5 +39,23 @@
 }
 
 .verifyBtn:hover {
-color: var(--text);    /* Darker green for hover effect */
-}
+    color: var(--text);    /* Darker green for hover effect */
+    }
+
+.deleteBtn {
+    padding: 3px 5px;
+    background-color: #dc2626; /* red-600 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;             /* center icon */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  .deleteBtn:hover {
+    background-color: #b61010; /* darker red */
+  }
+  

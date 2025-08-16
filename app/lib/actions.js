@@ -11,6 +11,7 @@ import { cookies } from "next/headers";
 import { SignJWT } from "jose";
 import { Article } from "./model/Blog";
 import {VerificationMaster} from "./model/VerificationMaster"
+import { User } from "./model/user";
 
 export async function logout() {
   try {
@@ -278,7 +279,6 @@ export const authenticate = async (formData) => {
       .setExpirationTime("7d")
       .sign(secretKey);
 
-    // ✅ Fix: Await `cookies()`
     const cookieStore = await cookies();
     cookieStore.set("session_token", token, {
       httpOnly: true,
@@ -297,7 +297,7 @@ export const authenticate = async (formData) => {
 
 export async function verifyCounselor({ userId }) {
   try {
-    console.log("userid:",userId)
+
     await connectDB();
 
     const alreadyVerified = await VerificationMaster.findOne({ userId });
@@ -307,7 +307,6 @@ export async function verifyCounselor({ userId }) {
         userId,
         adminVerified: true,
       });
-      console.log("Counselor verified successfully");
     }
 
     revalidatePath("/dashboard/users");
@@ -318,3 +317,25 @@ export async function verifyCounselor({ userId }) {
   }
 }
 
+
+export async function deleteUser(userId) {
+  try {
+
+    await connectDB();
+
+    // Delete the user by id
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      throw new Error("User not found");
+    }
+
+    // Refresh the users page after deletion
+    revalidatePath("/dashboard/users");
+
+    return { success: true, message: "User deleted successfully" };
+  } catch (error) {
+    console.error("Error deleting user:", error.message);
+    throw new Error("Failed to delete user");
+  }
+}

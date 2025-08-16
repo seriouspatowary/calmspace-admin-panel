@@ -6,8 +6,6 @@ import {
   MdSupervisedUserCircle,
 MdArticle,
   MdPeople,
-  MdOutlineSettings,
-  MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
 import MenuLink from './menuLink/menuLink';

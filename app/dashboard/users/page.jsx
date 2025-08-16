@@ -4,8 +4,8 @@ import { fetchUsers } from "@/app/lib/data/user"
 import Pagination from "@/app/ui/dashboard/pagination/pagination"
 import Search from "@/app/ui/dashboard/search/search"
 import styles from "@/app/ui/dashboard/users/users.module.css"
-import Image from "next/image"
 import VerifyButton from "@/app/ui/dashboard/verifyButton/VerifyButton";
+import DeleteButton from "@/app/ui/dashboard/deleteUser/delete";
 
 const UsersPage = async ({searchParams}) => {
   const {q,page} = await searchParams
@@ -26,6 +26,7 @@ const UsersPage = async ({searchParams}) => {
             <td>Created At</td>
             <td>Role</td>
             <td>Verificstion Status</td>
+            <td>Action</td>
           </tr>
         </thead>
         <tbody>
@@ -48,18 +49,21 @@ const UsersPage = async ({searchParams}) => {
             <td>{data.age  || "NA"}</td>
             <td>{data.createdAt.toString().slice(4, 16)}</td>
             <td>{data.role}</td>
-          <td>
-        {data.role === "counselor" ? (
-          data.adminVerified ? (
-            <span className={styles.verified}>Verified</span>
-          ) : (
-            <VerifyButton userId={data._id.toString()} />
+            <td>
+              {data.role === "counselor" ? (
+                data.adminVerified ? (
+                  <span className={styles.verified}>Verified</span>
+                ) : (
+                  <VerifyButton userId={data._id.toString()} />
 
-          )
-        ) : (
-          <span>NA</span>
-        )}
-      </td>
+                )
+              ) : (
+                <span>NA</span>
+              )}
+            </td>
+            <td>
+                <DeleteButton  userId={data._id.toString()} />
+            </td>
 
 
           </tr>
