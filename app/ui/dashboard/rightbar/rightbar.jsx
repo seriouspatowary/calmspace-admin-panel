@@ -25,22 +25,7 @@ const Rightbar = () => {
           </a>
         </div>
       </div>
-      <div className={styles.item}>
-        <div className={styles.text}>
-          <span className={styles.notification}>🚀 Coming Soon</span>
-          <h3 className={styles.title}>
-            Business Success with Bhagavad Gita. Motivation on Leadership & Management for Corporate
-          </h3>
-          <span className={styles.subtitle}>Boost your productivity</span>
-          <p className={styles.desc}>
-            The Bhagavad Gita offers timeless wisdom that can transform leadership and management in the corporate world. Its teachings emphasize duty (dharma),resilience in adversity, ethical decision-making, and selfless leadership.
-          </p>
-          <a href="https://www.youtube.com/watch?v=rOA6H4n-tXs" className={styles.button} target="_blank" rel="noopener noreferrer">
-            <MdPlayCircleFilled />
-            Watch
-          </a>
-        </div>
-      </div>
+
     </div>
   );
 };

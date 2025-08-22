@@ -38,7 +38,6 @@ const Dashboard = async () => {
           <Card 
             title="Total Users" 
             number={totalUsers} 
-            detail={<span><span>{currentWeekStats.percentChangeFromPreviousWeek}% </span>more than previous week</span>} 
           />
           <Card 
             title="Total Counselors" 
