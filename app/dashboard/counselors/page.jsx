@@ -17,7 +17,7 @@ const Counselors = async({searchParams}) => {
   return (
   <div className={styles.container}>
       <div className={styles.top}>
-        <Search placeholder="Search for user..."/>
+        <Search placeholder="Search for Counselor..."/>
       </div>
       <table className={styles.table}>
         <thead>

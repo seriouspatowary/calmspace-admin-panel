@@ -17,7 +17,7 @@ const FeaturesPage = async ({ searchParams }) => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Search placeholder="Search for a user..." />
+        <Search placeholder="Search for a Feature..." />
         <Link href="/dashboard/features/add">
           <button className={styles.addButton}>Add New</button>
         </Link>

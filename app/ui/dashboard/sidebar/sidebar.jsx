@@ -55,7 +55,7 @@ const Sidebar = async() => {
   return (
     <div className={styles.container}>
       <div className={styles.user}>
-        <Image className={styles.userImage} src="/logo.png" alt="calmspace" width="50" height="50" />
+        <Image className={styles.userImage} src="/crop.png" alt="calmspace" width="50" height="50" />
         <div className={styles.userDetail}>
           <span className={styles.username}>{ email}</span>
           <span className={styles.userTitle}>Administrator</span>
