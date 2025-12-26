@@ -3,9 +3,9 @@
 
 
 import { useState } from "react";
-import styles from "@/app/ui/dashboard/blogs/addBlog.module.css";
+import styles from "../../../ui/dashboard/blogs/addBlog.module.css";
 import { MdAdd, MdDelete, MdEdit, MdHome, MdCheckCircle } from "react-icons/md";
-import { addBlog } from "@/app/lib/actions";
+import { addBlog } from "../../../lib/actions";
 
 const AddBlogPage = () => {
   const [contentSections, setContentSections] = useState([

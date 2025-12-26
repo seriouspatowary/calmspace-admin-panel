@@ -1,13 +1,13 @@
 export const dynamic = "force-dynamic";
 
 
-import Pagination from "@/app/ui/dashboard/pagination/pagination";
-import Search from "@/app/ui/dashboard/search/search";
-import styles from "@/app/ui/dashboard/features/features.module.css";
+import Pagination from "../../ui/dashboard/pagination/pagination";
+import Search from "../../ui/dashboard/search/search";
+import styles from "../../ui/dashboard/features/features.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchFeatures } from "@/app/lib/data/feature";
-import { deleteFeature } from "@/app/lib/actions";
+import { fetchFeatures } from "../../lib/data/feature";
+import { deleteFeature } from "../../lib/actions";
 
 const FeaturesPage = async ({ searchParams }) => {
 

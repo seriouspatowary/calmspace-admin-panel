@@ -1,12 +1,12 @@
 export const dynamic = "force-dynamic";
 
-import Pagination from "@/app/ui/dashboard/pagination/pagination";
-import Search from "@/app/ui/dashboard/search/search";
-import styles from "@/app/ui/dashboard/features/features.module.css";
+import Pagination from "../../ui/dashboard/pagination/pagination";
+import Search from "../../ui/dashboard/search/search";
+import styles from "../../ui/dashboard/features/features.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchBlogs } from "@/app/lib/data/blog";
-import { deleteBlog } from "@/app/lib/actions";
+import { fetchBlogs } from "../../lib/data/blog";
+import { deleteBlog } from "../../lib/actions";
 
 const BlogPage = async ({ searchParams }) => {
 

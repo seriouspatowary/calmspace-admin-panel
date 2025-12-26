@@ -1,11 +1,11 @@
 export const dynamic = "force-dynamic";
 
-import { fetchUsers } from "@/app/lib/data/user"
-import Pagination from "@/app/ui/dashboard/pagination/pagination"
-import Search from "@/app/ui/dashboard/search/search"
-import styles from "@/app/ui/dashboard/users/users.module.css"
-import VerifyButton from "@/app/ui/dashboard/verifyButton/VerifyButton";
-import DeleteButton from "@/app/ui/dashboard/deleteUser/delete";
+import { fetchUsers } from "../../lib/data/user"
+import Pagination from "../../ui/dashboard/pagination/pagination"
+import Search from "../../ui/dashboard/search/search"
+import styles from "../../ui/dashboard/users/users.module.css"
+import VerifyButton from "../../ui/dashboard/verifyButton/VerifyButton";
+import DeleteButton from "../../ui/dashboard/deleteUser/delete";
 
 const UsersPage = async ({searchParams}) => {
   const {q,page} = await searchParams

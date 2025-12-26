@@ -1,9 +1,9 @@
 "use client";
 
-import { deleteUser } from "@/app/lib/actions";
+import { deleteUser } from "../../../lib/actions";
 import { Trash2 } from "lucide-react";
-import useToast from "@/app/hooks/useToast";
-import styles from "@/app/ui/dashboard/users/users.module.css"
+import useToast from "../../../hooks/useToast";
+import styles from "../../../ui/dashboard/users/users.module.css"
 
 
 const DeleteButton = ({ userId }) => {

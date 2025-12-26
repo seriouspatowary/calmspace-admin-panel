@@ -2,10 +2,10 @@ export const dynamic = "force-dynamic";
 
 
 import React from 'react'
-import styles from '@/app/ui/dashboard/features/singleFeature/singleFeature.module.css'
+import styles from '../../../ui/dashboard/features/singleFeature/singleFeature.module.css'
 import Image from 'next/image'
-import { updateBlog } from '@/app/lib/actions';
-import { fetchBlog } from '@/app/lib/data/blog';
+import { updateBlog } from '../../../lib/actions';
+import { fetchBlog } from '../../../lib/data/blog';
 
 const SingleBlogpage = async({ params }) => {
 

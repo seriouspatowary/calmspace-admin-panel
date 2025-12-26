@@ -2,10 +2,10 @@ export const dynamic = "force-dynamic";
 
 
 import React from 'react'
-import styles from '@/app/ui/dashboard/features/singleFeature/singleFeature.module.css'
+import styles from '../../../ui/dashboard/features/singleFeature/singleFeature.module.css'
 import Image from 'next/image'
-import { fetchFeature} from '@/app/lib/data/feature';
-import { updateFeature } from '@/app/lib/actions';
+import { fetchFeature} from '../../../lib/data/feature';
+import { updateFeature } from '../../../lib/actions';
 
 const SingleFeaturepage = async({ params }) => {
 

@@ -1,7 +1,7 @@
 "use client";
 
-import useToast from "@/app/hooks/useToast";
-import { verifyCounselor } from "@/app/lib/actions"
+import useToast from "../../../hooks/useToast";
+import { verifyCounselor } from "../../../lib/actions"
 import styles from "../users/users.module.css"
 
 const VerifyButton = ({ userId }) => {

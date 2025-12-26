@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "@/app/ui/login/login.module.css";
+import styles from "../ui/login/login.module.css";
 import { authenticate } from "../lib/actions";
 import useToast from "../hooks/useToast";
 
